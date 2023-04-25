@@ -1,0 +1,31 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: c_nginx
+    ports:
+      - "8080:80"
+      - "8081:81"
+    volumes:
+      - ./www/index.php:/usr/share/nginx/html/index.php:rw
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    environment:
+      TZ: "Asia/Shanghai"
+    restart: always
+    networks:
+      - lnmp
+  php:
+    image: php:7.3.29-fpm
+    container_name: php73
+    volumes:
+      - ./www:/var/www/html:rw
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    depends_on:
+      - nginx
+    networks:
+      - lnmp
+networks:
+  #创建了一个自定义的网络叫做lnmp
+  lnmp:
