@@ -1,0 +1,7 @@
+# Reference https://github.com/github/gitignore/blob/master/Go.gitignore
+# log
+*.log
+
+# Develop tools
+.vscode/
+.idea/

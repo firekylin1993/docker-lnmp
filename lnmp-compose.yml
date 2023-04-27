@@ -4,6 +4,7 @@ services:
     image: nginx:1.14
     container_name: c_nginx
     ports:
+      #需要暴露的端口映射
       - "8080:80"
       - "8081:81"
     volumes:
@@ -22,8 +23,9 @@ services:
     image: php:7.4-fpm
     container_name: php74
     volumes:
-      - ./www:/home/wwwroot:rw
       - ./log/php:/home/wwwlogs:rw
+      - ./www:/home/wwwroot:rw
+      - ./php/74/php.ini:/usr/local/etc/php/php.ini:rw
     restart: always
     cap_add:
       - SYS_PTRACE
